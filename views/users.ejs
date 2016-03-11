@@ -1,0 +1,45 @@
+<!DOCTYPE>
+<html>
+    <head> 
+    <script type="text/javascript" src="../public/js/all.js"></script>       
+    </head>
+    <body>
+         <a href="../users/add">+ ADD</a>
+         <a>
+            <table border="1" >
+                <tr>
+                    <th>No</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Email</th>
+                    <th>Id</th>
+                    <th>Action</th>
+                </tr>
+                               
+                <% if(data.user.length){ 
+                                
+                 for(var i = 0; i < data.user.length; i++) { %>
+                 
+                <tr>
+                    <td><%=(i+1)%></td>
+                    <td><%=data.user[i].firstname%></td>
+                    <td><%=data.user[i].lastname%></td>
+                    <td><%=data.user[i].email%></td>
+                    <td><%=data.user[i].id%></td>
+                    <td>
+                        <a href="../users/<%=data.user[i].id%>">Edit</a>
+                       
+                        <a href="../users/<%=data.user[i].id%>">Delete</a>
+                       
+                    </td>
+                </tr>
+            <% }
+            
+             }else{ %>
+                 <tr>
+                    <td colspan="3">No user</td>
+                 </tr>
+            <% } %>
+             </table>
+        </body>
+</html>
