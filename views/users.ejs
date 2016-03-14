@@ -1,11 +1,10 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
     <head> 
     <script type="text/javascript" src="../public/js/all.js"></script>       
     </head>
     <body>
          <a href="../users/add">+ ADD</a>
-         <a>
             <table border="1" >
                 <tr>
                     <th>No</th>
@@ -27,9 +26,9 @@
                     <td><%=data.user[i].email%></td>
                     <td><%=data.user[i].id%></td>
                     <td>
-                        <a href="../users/<%=data.user[i].id%>">Edit</a>
+                        <a href="../users<%=data.user[i].id%>">Edit</a>
                        
-                        <a href="../users/<%=data.user[i].id%>">Delete</a>
+                        <a href="../users/delete/<%=data.user[i].id%>">Delete</a>
                        
                     </td>
                 </tr>
@@ -40,6 +39,6 @@
                     <td colspan="3">No user</td>
                  </tr>
             <% } %>
-             </table>
-        </body>
+            </table>
+     </body>
 </html>

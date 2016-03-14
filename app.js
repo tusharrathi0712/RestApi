@@ -41,7 +41,7 @@ app.get('/users', function (req, res) {
 });
 
 
-app.delete('/users/:id', function (req, res) {
+app.get('/users/delete/:id', function (req, res) {
     
 	var id = req.params.id;
 	var options = {
@@ -53,8 +53,9 @@ app.delete('/users/:id', function (req, res) {
     // HTTP GET request
     var reqGet = http.request(options, function(response) {
         response.on('data', function(data) {         	
-        	var user = JSON.parse(data);
-        	res.render('users', { data: user });                        
+        	//var user = JSON.parse(data);
+        	//res.render('try', { data: user });  
+        	res.redirect('/users');
         });
     });
     reqGet.end();    
@@ -70,34 +71,39 @@ app.get('/users/add',function (req, res){
 
 
 app.post('/users/add', function (req, res) {
-	
 	var post_data = {
 	    	"firstname": req.body.firstname,
 			"lastname": req.body.lastname,
 			"email": req.body.email,
-			"id": req.body.id		
+			"id": req.body.id	
 	    };
-	var body = JSON.parse(post_data);
+	console.log(post_data);
+	//console.log(post_data.firstname + " " +post_data.lastname + " " + post_data.email + " "+ post_data.id);
+	var body = JSON.stringify(post_data);
+	//var body = JSON.parse(post_data);
 	
 	var options = {
 		    host: 'localhost',
 		    port: 3000,
 		    path: '/users',
-		    method: 'POST',	
+		    method: 'POST',			
+		    headers: {
+		        "content-type": "application/json",
+		        },		  
 		    body: body
 	};
 	
-	console.log(options.body.firstname);
 	
-    // HTTP GET request
+	
     var reqGet = http.request(options, function(response) {
+    	
     	response.on('data', function(data) {         	
         	var user = JSON.parse(data);
         	res.render('try', { data: user });
         	//res.redirect('/users');
         });
     });
-    reqGet.end();    
+
     reqGet.on('error', function(e) {
         console.error(e);
     });
